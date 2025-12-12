@@ -42,6 +42,7 @@ from chips._74hc4066 import HC4066
 from chips._74hc02 import HC02
 from chips._74hc86 import HC86
 from chips._62256 import SRAM62256
+from chips.cy7c128 import CY7C128
 
 def build_chip_registry():
     """
@@ -83,7 +84,8 @@ def build_chip_registry():
         "74HC4066 Quad Analog Switch": HC4066,
         "74HC02 Quad 2-Input NOR Gate":HC02,
         "74HC86 Quad 2-Input XOR Gate":HC86,
-        "62256 SRAM":SRAM62256
+        "62256 SRAM":SRAM62256,
+        "CY7C128 SRAM":CY7C128
     }
 
 
