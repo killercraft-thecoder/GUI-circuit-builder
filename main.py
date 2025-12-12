@@ -41,6 +41,7 @@ from chips._74hc4060 import HC4060
 from chips._74hc4066 import HC4066
 from chips._74hc02 import HC02
 from chips._74hc86 import HC86
+from chips._62256 import SRAM62256
 
 def build_chip_registry():
     """
@@ -81,7 +82,8 @@ def build_chip_registry():
         "74HC4060 Oscillator/Counter": HC4060,
         "74HC4066 Quad Analog Switch": HC4066,
         "74HC02 Quad 2-Input NOR Gate":HC02,
-        "74HC86 Quad 2-Input XOR Gate":HC86
+        "74HC86 Quad 2-Input XOR Gate":HC86,
+        "62256 SRAM":SRAM62256
     }
 
 
