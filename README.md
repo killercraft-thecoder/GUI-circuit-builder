@@ -28,6 +28,7 @@ It includes a modular simulation engine, a visual circuit editor, and a growing 
 - Memory: 28C16 EEPROM, 6116 SRAM  
 - ALU: 74LS181  
 - Timer: NE555 (digital model)
+- And a ton more!
 
 ---
 
