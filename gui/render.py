@@ -98,7 +98,7 @@ class Renderer:
 
         # Auto-size based on pin count
         pin_count = len(comp.pins)
-        width = max(120, pin_count * 18)
+        width = max(200, pin_count * 22)
         height = 70
 
         rect = pygame.Rect(x, y, width, height)
@@ -116,7 +116,7 @@ class Renderer:
 
         # Draw pins
         for i, (name, pin) in enumerate(comp.pins.items()):
-            px = x + 20 + (i * 18)
+            px = x + 20 + (i * 22)
             py = y + height - 12
 
             color = (0,0,0)
