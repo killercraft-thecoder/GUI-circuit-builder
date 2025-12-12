@@ -24,6 +24,21 @@ from chips._74hc08 import HC08
 from chips._74hc32 import HC32
 from chips._74hc161 import HC161
 from chips._74hc193 import HC193
+from chips._74hc245 import HC245
+from chips._74hc125 import HC125
+from chips._74hc138 import HC138
+from chips._74hc139 import HC139
+from chips._74hc157 import HC157
+from chips._74hc153 import HC153
+from chips._74hc04 import HC04
+from chips._74hc14 import HC14
+from chips._74hc74 import HC74
+from chips._74hc175 import HC175
+from chips._74hc273 import HC273
+from chips._74hc85 import HC85
+from chips._74hc4040 import HC4040
+from chips._74hc4060 import HC4060
+from chips._74hc4066 import HC4066
 
 
 def build_chip_registry():
@@ -49,6 +64,21 @@ def build_chip_registry():
         "74HC32 OR": HC32,
         "74HC161 Counter": HC161,
         "74HC193 Up/Down Counter": HC193,
+        "74HC245 Bus Transceiver": HC245,
+        "74HC125 Quad Tri-State Buffer": HC125,
+        "74HC138 3-to-8 Decoder": HC138,
+        "74HC139 Dual 2-to-4 Decoder": HC139,
+        "74HC157 Quad 2-to-1 MUX": HC157,
+        "74HC153 Dual 4-to-1 MUX": HC153,
+        "74HC04 Hex Inverter": HC04,
+        "74HC14 Schmitt Inverter": HC14,
+        "74HC74 Dual D Flip-Flop": HC74,
+        "74HC175 Quad D Flip-Flop": HC175,
+        "74HC273 8-bit Register": HC273,
+        "74HC85 4-bit Comparator": HC85,
+        "74HC4040 12-bit Counter": HC4040,
+        "74HC4060 Oscillator/Counter": HC4060,
+        "74HC4066 Quad Analog Switch": HC4066,
     }
 
 
@@ -58,7 +88,7 @@ def main():
 
     screen_width = 1280
     screen_height = 720
-    screen = pygame.display.set_mode((screen_width, screen_height))
+    screen = pygame.display.set_mode((screen_width, screen_height),pygame.RESIZABLE)
 
     clock = pygame.time.Clock()
 

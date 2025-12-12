@@ -20,6 +20,7 @@ class Pin:
         self.owner:Any = owner      # Component that owns this pin
         self.value = None       # 0, 1, or None (high-Z)
         self.wires = []         # list of Wire objects
+        self.screen_pos:tuple[int,int] = (0,0) # Position on Screen for renderer
 
     # ---------------------------------------------------------
     # VALUE ACCESS
@@ -39,6 +40,12 @@ class Pin:
                 f"Pin {self.name} on {self.owner.label} is INPUT and cannot drive a value"
             )
         self.value = value
+
+    def is_shorted(self):
+        return any(wire.short for wire in self.wires)
+    
+    def get_screen_pos(self):
+        return self.screen_pos
 
     # ---------------------------------------------------------
     # CONNECTION

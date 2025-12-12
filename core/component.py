@@ -1,6 +1,6 @@
 # component.py
 from enum import Enum
-from pin import Pin,PinDirection
+from core.pin import Pin,PinDirection
 
 
 
@@ -16,7 +16,7 @@ class Component:
         Component._id_counter += 1
 
         self.label = label
-        self.pins = {}      # name -> Pin
+        self.pins: dict[str,Pin] = {}      # name -> Pin
         self.position = (0, 0)  # GUI will set this
         self.state = {}     # internal chip state (registers, counters, etc.)
 

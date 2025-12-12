@@ -1,6 +1,6 @@
 # engine.py
-from wire import Wire
-from component import Component
+from core.wire import Wire
+from core.component import Component
 
 class Engine:
     """
@@ -38,6 +38,10 @@ class Engine:
         # Remove the component itself
         if comp in self.components:
             self.components.remove(comp)
+
+    def delete_wire(self, wire):
+        if wire in self.wires:
+            self.wires.remove(wire)
 
     # ---------------------------------------------------------
     # SIMULATION LOOP

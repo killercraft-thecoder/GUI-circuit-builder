@@ -1,6 +1,7 @@
 # render.py
 import pygame
 import inspect
+from core.component import Component # for type reasons
 
 PIN_RADIUS = 6
 FONT_SIZE = 16
@@ -92,12 +93,12 @@ class Renderer:
     # COMPONENTS
     # ---------------------------------------------------------
 
-    def _draw_component(self, comp):
+    def _draw_component(self, comp:Component):
         x, y = comp.position
 
         # Auto-size based on pin count
         pin_count = len(comp.pins)
-        width = max(120, pin_count * 12)
+        width = max(120, pin_count * 18)
         height = 70
 
         rect = pygame.Rect(x, y, width, height)
@@ -115,13 +116,28 @@ class Renderer:
 
         # Draw pins
         for i, (name, pin) in enumerate(comp.pins.items()):
-            px = x + 20 + (i * 12)
+            px = x + 20 + (i * 18)
             py = y + height - 12
 
-            pygame.draw.circle(self.screen, (255, 255, 255), (px, py), PIN_RADIUS)
+            color = (0,0,0)
+
+            if pin.is_shorted():
+                color = (255, 255, 0)
+            elif pin.value == 0:
+                color = (0, 128, 255)
+            elif pin.value == 1:
+                color = (255, 0, 0)
+
+            pygame.draw.circle(self.screen, color, (px, py), PIN_RADIUS)
 
             # Store for picking
             pin.screen_pos = (px, py)
+
+            font = pygame.font.SysFont(None, 12)   # very small font
+            text_surf = font.render(name, True, (255, 255, 255))
+            text_rect = text_surf.get_rect(center=(px, py - 8))
+            self.screen.blit(text_surf, text_rect)
+
 
     # ---------------------------------------------------------
     # LED RENDERING
@@ -192,6 +208,39 @@ class Renderer:
                 return comp, None
 
         return None, None
+
+    def pick_wire_at(self, pos):
+        mx, my = pos
+
+        # Simple distance-to-line check
+        for wire in self.engine.wires:
+            (x1, y1) = wire.pins[0].get_screen_pos()
+            (x2, y2) = wire.pins[1].get_screen_pos()
+
+            # Distance from point to line segment
+            # Using bounding box first for speed
+            if not (min(x1, x2) - 4 <= mx <= max(x1, x2) + 4 and
+                    min(y1, y2) - 4 <= my <= max(y1, y2) + 4):
+                continue
+
+            # Now do precise distance check
+            # Line parametric projection
+            dx = x2 - x1
+            dy = y2 - y1
+            if dx == 0 and dy == 0:
+                continue
+
+            t = ((mx - x1) * dx + (my - y1) * dy) / (dx*dx + dy*dy)
+            t = max(0, min(1, t))
+
+            px = x1 + t * dx
+            py = y1 + t * dy
+
+            dist2 = (mx - px)**2 + (my - py)**2
+            if dist2 <= 16:  # within 4px
+                return wire
+
+        return None
 
     # ---------------------------------------------------------
     # MENU PICKING

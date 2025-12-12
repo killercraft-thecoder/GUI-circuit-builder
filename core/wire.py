@@ -1,5 +1,5 @@
 # wire.py
-from pin import PinDirection
+from core.pin import PinDirection
 
 
 class Wire:

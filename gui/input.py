@@ -82,9 +82,14 @@ class InputHandler:
             return
         
     def _right_click(self, pos):
-        comp, pin = self.renderer.pick_at(pos)
+        # Check for wire first
+        wire = self.renderer.pick_wire_at(pos)
+        if wire:
+            self.engine.delete_wire(wire)
+            return
 
-        # Delete component if clicked
+        # Then check for component
+        comp, pin = self.renderer.pick_at(pos)
         if comp:
             self.engine.delete_component(comp)
             return
