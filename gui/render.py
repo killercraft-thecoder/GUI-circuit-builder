@@ -1,6 +1,7 @@
 # render.py
 import pygame
 import inspect
+import difflib # For sorting part names
 from core.component import Component # for type reasons
 
 PIN_RADIUS = 6
@@ -18,6 +19,15 @@ LED_ON = (255, 80, 80)
 LED_OFF = (80, 20, 20)
 LED_Z = (40, 40, 40)
 
+def search_and_sort_components(components, search_for: str):
+    """Return a list of (key, value) pairs sorted by fuzzy match to the key."""
+    return sorted(
+        components.items(),  # gives (key, value) pairs
+        key=lambda kv: difflib.SequenceMatcher(None, search_for, kv[0]).ratio(),
+        reverse=True
+    )
+
+
 
 class Renderer:
     """
@@ -33,6 +43,7 @@ class Renderer:
         self.chip_classes = chip_classes  # dict: name -> class
         self.menu_scroll = 0
         self.menu_item_height = 80
+        self.search_text = "" # chip name the user is searching for
 
         # Cached menu rectangles for input handler
         self.menu_hitboxes = []
@@ -62,12 +73,20 @@ class Renderer:
     # ---------------------------------------------------------
 
     def _draw_menu(self):
-        pygame.draw.rect(self.screen, MENU_BG, (0, 0, MENU_WIDTH, self.screen.get_height()))
+        rendered_search_text = self.font.render(self.search_text if self.search_text else "Type here...",True,(255,255,255)) # render text user is searching for
+        self.screen.blit(rendered_search_text,(0,0)) # Blit it to screen
+
+        pygame.draw.rect(self.screen, MENU_BG, (12, 12, MENU_WIDTH, self.screen.get_height()))
+
+        HEADER_HEIGHT = 40
 
         self.menu_hitboxes = []
-        y = -self.menu_scroll
+        y = HEADER_HEIGHT - self.menu_scroll
+        chip_list = self.chip_classes.items()
+        if len(self.search_text) > 0: # only change chip_list to search list if the search text not blank
+            chip_list = search_and_sort_components(self.chip_classes,self.search_text)
 
-        for name, cls in self.chip_classes.items():
+        for name, cls in chip_list:
             rect = pygame.Rect(0, y, MENU_WIDTH, self.menu_item_height)
 
             # Background

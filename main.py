@@ -88,7 +88,6 @@ def build_chip_registry():
         "CY7C128 SRAM":CY7C128
     }
 
-
 def main():
     pygame.init()
     pygame.display.set_caption("Logic Simulator")

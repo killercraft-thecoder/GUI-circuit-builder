@@ -48,6 +48,15 @@ class InputHandler:
         elif event.type == pygame.MOUSEMOTION:
             self._mouse_move(event.pos)
 
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_BACKSPACE:
+                self.renderer.search_text = self.renderer.search_text[:len(self.renderer.search_text) - 1] # remove the last charecter in it.
+            elif event.key == pygame.K_ESCAPE:
+                self.search_text = ""
+            else:
+                self.renderer.search_text += event.unicode
+
+
     # ---------------------------------------------------------
     # MOUSE DOWN
     # ---------------------------------------------------------
