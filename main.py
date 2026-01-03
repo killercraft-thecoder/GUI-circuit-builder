@@ -90,6 +90,31 @@ from chips._74ls123 import LS123
 from chips._74ls138a import LS138A
 from chips._74ls240 import LS240
 from chips._74ls241 import LS241
+from chips._74hc10 import HC10
+from chips._74hc11 import HC11
+from chips._74hc20 import HC20
+from chips._74hc21 import HC21
+from chips._74hc27 import HC27
+from chips._74hc30 import HC30
+from chips._74hc01 import HC01
+from chips._74hc05 import HC05
+from chips._74hc07 import HC07
+from chips._74hc259 import HC259
+from chips._74hc73 import HC73
+from chips._74hc109 import HC109
+from chips._74hc112 import HC112
+from chips._74hc377 import HC377
+from chips._74hc374 import HC374
+from chips._74hc155 import HC155
+from chips._74hc4514 import HC4514
+from chips._74hc4515 import HC4515
+from chips._74hc132 import HC132
+from chips._74hc4069 import HC4069
+from chips._74hc147 import HC147
+from chips._74hc148 import HC148
+from chips._74hc148a import HC148A
+from chips._cd4532 import CD4532
+from chips._74hc148n import HC148N
 
 
 
@@ -182,6 +207,33 @@ def build_chip_registry():
 "74LS138A 3-to-8 Decoder (TTL Variant)": LS138A,
 "74LS240 Octal Inverting Buffer/Driver": LS240,
 "74LS241 Octal Buffer/Driver": LS241,
+    "74HC10": HC10,
+    "74HC11": HC11,
+    "74HC20": HC20,
+    "74HC21": HC21,
+    "74HC27": HC27,
+    "74HC30": HC30,
+    "74HC01": HC01,
+    "74HC05": HC05,
+    "74HC07": HC07,
+    "74HC259": HC259,
+    "74HC73": HC73,
+    "74HC109": HC109,
+    "74HC112": HC112,
+    "74HC377": HC377,
+    "74HC374": HC374,
+    "74HC155": HC155,
+    "74HC4514": HC4514,
+    "74HC4515": HC4515,
+    "74HC132": HC132,
+    "74HC4069": HC4069,
+    "74HC147": HC147,
+    "74HC148": HC148,
+    "74HC148A": HC148A,
+    "CD4532": CD4532,
+    "74HC148N": HC148N,
+
+
     }
 
 def main():
